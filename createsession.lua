@@ -18,6 +18,7 @@ return function (redis, args)
 
 	local session = username .. ":" .. rand_hex()
 	redis:sadd("sessions", session)
+	redis:sadd("0-0", session)
 
   local session_details = cjson.encode{
     session = session

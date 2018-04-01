@@ -14,15 +14,16 @@ local html = [[
 	margin-bottom: 1px;
 }
 </style>
-<h1 class="article-title">My Queue</h1>
-<button id=req class="btn-large" style="width: 60%">Request Message</button>
+<h1 class="article-title">Publish Messages</h1>
+<button id=lorum class="btn-large" style="width: 60%">Produce Lorum Ipsum Startup Drivel</button>
 <br><br>
 <div id=content>
 </div>
+<button id=custom class="btn-large" style="width: 60%">Produce Custom Message</button>
 <script>
 $(document).ready(function() {
 
-  function getMessage() {
+  function postLorum() {
 	  $.ajax({
 		  type: "POST",
 			url: "/getmessage",
@@ -38,8 +39,9 @@ $(document).ready(function() {
 		});
 	}
 
-  var req = document.getElementById("req");
-	req.addEventListener("touchend", function(event) {
+  var lorum = document.getElementById("lorum");
+  var custom = document.getElementById("custom");
+	req.addEventListener("lorum", function(event) {
 	  event.preventDefault();
     getMessage();
 	});
