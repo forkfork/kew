@@ -3,9 +3,9 @@ local cjson = require "cjson"
 
 return function (redis, args)
 	local message = args.message
-	if(not message or message:match("%W")) then
+	if(not message) then
 	  ngx.status = 400
-		ngx.say("An alphanumeric-only message is needed")
+		ngx.say("A message is needed")
 		return
 	end
 

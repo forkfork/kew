@@ -11,6 +11,13 @@ local queueshtml = [[
   margin-top: 1px;
   margin-bottom: 1px;
 }
+.nsize {
+  float: left;
+  padding: 10px;
+  width: 90px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
 .item {
   float: left;
   border: 2px solid black;
@@ -24,10 +31,15 @@ local queueshtml = [[
   clear:both;
   width: 4000px;
 }
+.mem {
+  color: blue;
+}
 </style>
+<h1 class=mem>Memory Consumption: {{#messages}} MB</h1>
 {% for i = 1, #messages do %}
   <div class=line>
   <h1 class=session>{*messages[i].message*}</h1>
+	<h1 class=nsize>n={{#messages[i].subs}}</h1>
   {% for n = 1, #messages[i].subs do %}
     <h1 class=item>{{messages[i].subs[n]}}</h1>
   {% end %}
@@ -47,15 +59,14 @@ end
 local getmessages = function(redis)
   ngx.header["content-type"] = "text/html"
   local sessions, err = redis:xread("COUNT", 200, "STREAMS", "queue", "0-0")
-	if sessions == ngx.null then
-	  ngx.say("wat " .. tostring(err))
-	  return
-	end
-  local datapoints = sessions[1][2]
   local messages = {{
     message = "<i>just connected</i>",
     subs = getsubs(redis, "0-0")
   }}
+	if sessions == ngx.null then
+	  return messages
+	end
+  local datapoints = sessions[1][2]
   for i = 1, #datapoints do
     local messageid = datapoints[i][1]
     local subs = getsubs(redis, messageid)
@@ -63,7 +74,6 @@ local getmessages = function(redis)
       message = datapoints[i][2][2],
       subs = subs
     }
-    ngx.log(ngx.ERR, cjson.encode(messages))
   end
   return messages
 end

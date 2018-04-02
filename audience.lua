@@ -1,9 +1,9 @@
 local html = [[
 <script
-  src="http://code.jquery.com/jquery-2.2.4.min.js"
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
 	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
 	crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="http://unpkg.com/papercss@1.4.1/dist/paper.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/papercss@1.4.1/dist/paper.min.css">
 <style>
 .item {
   float: left;
