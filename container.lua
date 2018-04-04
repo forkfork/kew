@@ -30,15 +30,13 @@ var rc = rough.canvas(canvas);
 var context = canvas.getContext('2d');
 var i = 1;
 var interval = setInterval(function() {
-  i = Number(document.getElementById("memsize").value);
+  i = Number(document.getElementById("memsize").value) / 2.0;
+	if (i > 120) { i = 120; }
   context.save();
 	context.setTransform(1, 0, 0, 1, 0, 0);
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	context.restore();
 	rc.rectangle(5, 5, i * 10, 70, { roughness: i / 100, fill: "rgb(" + (i*2) + ",0," + (255 - (i*2)) + ")" });
-	//if(i<120) {
-	//	i++;
-	//}
 }, 100)
 </script>
 ]]
