@@ -47,7 +47,9 @@ $(document).ready(function() {
 		getMessage();
 	});
 	function getUsername() {
-		var username = prompt("Please choose a username (alphanumeric, max 12 chars)");
+	  do {
+			var username = prompt("Please choose a username (alphanumeric, max 12 chars)");
+		} while (!username);
 		$.ajax({
 		  type: "POST",
 			url: "/createsession",

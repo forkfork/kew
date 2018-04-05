@@ -39,7 +39,13 @@ local queueshtml = [[
 .mem {
   color: blue;
 }
+.img {
+  position: absolute;
+	left: 700px;
+	top: 250px;
+}
 </style>
+<img class=img src="https://www.wiftycloud.com/images/QUEUE.png"></img>
 <h1 class=mem>Stream Memory Consumption: {{#messages - 1}} MB</h1>
 <input type=hidden id=memsize value={{#messages}}></input>
 {% for i = 1, #messages do %}
